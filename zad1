@@ -1,0 +1,19 @@
+import pandas as pd
+
+df = pd.read_csv('penguins.csv')
+print(df)
+clear_df = df.dropna()
+# Obliczamy średnią wagę dla gatunku 'Adelie' i płci 'MALE'
+mean_weight_M = clear_df[(clear_df['species'] == 'Adelie') & (clear_df['sex'] == 'MALE')]['body_mass_g'].mean()
+mean_weight_F = clear_df[(clear_df['species']=='Adelie')&(clear_df['sex']=='FEMALE')]['body_mass_g'].mean()
+mean_weight_M_C = clear_df[(clear_df['species']=='Chinstrap')&(clear_df['sex']=='MALE')]['body_mass_g'].mean()
+mean_weight_F_C = clear_df[(clear_df['species']=='Chinstrap')&(clear_df['sex']=='FEMALE')]['body_mass_g'].mean()
+print(f"Średnia waga to: {mean_weight_M}")
+print(f"Średnia waga żeńskich osobników Adelie to: {mean_weight_F}")
+print(f"Średnia waga męskich osobników chinstrap to:{mean_weight_M_C}")
+print(f"Średnia masa żenskich osobników chinstrap to:{mean_weight_F_C}")
+print(clear_df[clear_df['body_mass_g']==clear_df['body_mass_g'].max()])
+print(clear_df[clear_df['body_mass_g']==clear_df['body_mass_g'].min()])
+print(clear_df[clear_df['island']=='Torgersen'].count())
+print(clear_df)
+
