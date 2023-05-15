@@ -1,0 +1,32 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+df = pd.read_csv("penguins.csv")
+df = df.dropna()
+
+# Tworzenie mapy kolorów i markerów dla różnych płci i gatunków
+color_map = {'MALE': 'blue', 'FEMALE': 'red'}
+marker_map = {'Adelie': 'o', 'Chinstrap': 's', 'Gentoo': 'v'}
+
+# Przekształcanie danych o płci i gatunku na kolory i markery
+colors = df['sex'].map(color_map)
+markers = df['species'].map(marker_map)
+
+# Obliczanie rozmiarów punktów na podstawie wagi
+sizes = df['body_mass_g'] / 2000
+
+# Tworzenie wykresu punktowego
+for species in df['species'].unique():
+    plt.scatter(df[df['species'] == species]['bill_length_mm'],
+                df[df['species'] == species]['bill_depth_mm'],
+                c=colors[df['species'] == species],
+                s=sizes[df['species'] == species],
+                marker=marker_map[species],
+                label=species,
+                alpha=0.6)
+
+plt.xlabel('Długość dzioba [mm]')
+plt.ylabel('Szerokość dzioba [mm]')
+plt.title('Zależność szerokości dzioba od długości')
+plt.legend()
+plt.show()
